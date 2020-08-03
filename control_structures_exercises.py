@@ -89,27 +89,26 @@ while i >= -10:
     i -= 5
 
 
-# In[54]:
+# In[2]:
 
 
 ##Create a while loop that starts at 2, and displays the number squared on each line
 ##less than 1000000
 i = 2
-while i <= 10:
-    print(i * i)
-    i += 1
+while i <= 1000000:
+    print(i)
+    i = i ** 2
 
 
 # In[5]:
 
 
 #Write a loop that uses print to create the output shown below.
-def minus5():
-    i = 100
-    while i >= 5:
-        print(i)
-        i -= 5
-print(minus5())
+
+i = 100
+while i >= 5:
+    print(i)
+    i -= 5
 
 
 # In[2]:
@@ -123,7 +122,7 @@ for i in range(1, 11):
    print(num,"X",i,"=",num * i)
 
 
-# In[7]:
+# In[6]:
 
 
 #Create a for loop that uses print to create the output shown below.
@@ -132,9 +131,13 @@ for num in range(n+1):
     for i in range (num):
         print(num,end="")
     print("\r")
+    
+#also
+for i in range(1, 10):
+    print(str(i) * i)
 
 
-# In[20]:
+# In[12]:
 
 
 #C Prompt the user for an odd number between 1 and 50. Use a loop and a break 
@@ -143,25 +146,37 @@ for num in range(n+1):
 #loop and the continue statement to output all the odd numbers between 
 #1 awhile True:
 while True:
-    try:
-        skip = int(input("Pick a number to skip: "))
-    except ValueError:
-        print("Sorry, I didn't understand that.")
-        continue
-    else:
-        break
-for n in range(51):
-    if n % 2 == 0:
-        continue
-    if n == int(skip):
-        print('Yikes! Skipping number:', int(skip))
-    print('Here is an odd number: {}'.format(n))
-    
+
+     start_odd = input("Please input an odd number between 1 and 50: ")
+
+     if not start_odd.isdigit():
+         print("\nPlease input a positive integer value without decimals. ")
+         continue
+
+     if int(start_odd) < 1 or int(start_odd) > 50:
+         print("\nYou have entered a number outside of the specified range. Please try again. ")
+         continue
+
+     if int(start_odd) % 2 != 1:
+         print("\nYou have failed to enter an odd number. Please try again. ")
+         continue
+
+     else:
+         break
+
+     print(f"\nNumber to skip is: {start_odd}\n")
+
+for num in range(1, 51):
+     if num == int(start_odd):
+         print(f"Yikes! Skipping number: {start_odd}")
+         continue
+     if num % 2 == 1:
+         print(f"Here is an odd number: {num}")
 
 
 
 
-# In[19]:
+# In[17]:
 
 
 #The input function can be used to prompt for input and use that input in your 
@@ -170,17 +185,20 @@ for n in range(51):
 #entered is a valid number, also note that the input function returns a string, 
 #so you'll need to convert this to a numeric type.)
 while True:
-    try:
-        pos = int(input("Pick a positive number: "))
-    except ValueError:
-        print("Sorry, I didn't understand that.")
-        continue
-    else:
-        break
-i = 0
-for i in range(int(pos)+1):
-    print(i)
-    i += 1
+     count_to_num = input("Pick a positive number: ")
+
+     if not int(count_to_num.isdigit()):
+         print("Follow the instructions")
+         continue
+     if int(count_to_num) < 0:
+         print("Please enter a positive number. ")
+         continue
+     else:
+         break
+
+if int(num) > 0:
+     for i in range (0, int(count_to_num) + 1):
+         print(i)
     
 
 
@@ -226,7 +244,7 @@ for fizzbuzz in range(101):
     print(fizzbuzz)
 
 
-# In[5]:
+# In[18]:
 
 
 #Display a table of powers.
@@ -236,19 +254,32 @@ for fizzbuzz in range(101):
 #Assume that the user will enter valid data.
 #Only continue if the user agrees to.
 
-start = int(input("What number would you like to go up to?\t"))
-print()
+while True:    
+     table_target = int(input("What number would you like to go up to? "))
+     if table_target > 0:
+         print("\nHere is your table!\n")
+         print("number | squared | cubed")
+         print("------ | ------- | -----")
+         number_lst = []
+         for i in list(range(1, table_target + 1, 1)):
+             number_lst.append(i)
+         for n in range(0, len(number_lst), 1):
+             normal = number_lst[n]
+             squared = number_lst[n] ** 2
+             cubed = number_lst[n] ** 3
+             print(f"{normal:<7}| {squared:<8}| {cubed:<5}")
+     user_continue = input("\nWant another one? (y/n): ")
+     if user_continue == "y":
+         continue
+     if user_continue == "n":
+         print("\nOk, bye")
+         break
+     else:
+         print("\nYou are not making sense")
+         break
 
-def printTable(start):
-    result = 1
-    for x in range(start + 1):
-        print(x, x ** 2, x ** 3)
 
-# call your function like this:
-printTable(start)
-
-
-# In[29]:
+# In[23]:
 
 
 #Convert given number grades into letter grades.
@@ -257,23 +288,54 @@ printTable(start)
 #Prompt the user to continue.
 #Assume that the user will enter valid integers for the grades.
 #The application should only continue if the user agrees to.
-
-grade = int(input("What was your grade?\t"))
-print()
-if grade >= 88 and grade <= 100:
-    print("You received an A")
-
-elif grade >= 80 and grade <= 87:
-    print("You received a B")
-
-elif grade >= 67 and grade <= 79:
-    print("You received a C")
-
-elif grade >= 60 and grade <= 66:
-    print("You received a D")
+while True:
     
-elif grade >=0 and grade <= 59:
-    print("You failed with an F")
+    grade = int(input("What was your grade?\t"))
+    print()
+    if grade >= 88 and grade <= 100:
+        print("You received an A")
+
+    elif grade >= 80 and grade <= 87:
+        print("You received a B")
+
+    elif grade >= 67 and grade <= 79:
+        print("You received a C")
+
+    elif grade >= 60 and grade <= 66:
+        print("You received a D")
+
+    elif grade >=0 and grade <= 59:
+        print("You failed with an F")
+        
+    wants_to_continue = input("Do you want to continue? y/n\n")
+    if wants_to_continue not in ["y"]:
+        break
+        
+print("We are done here")
+
+
+# In[27]:
+
+
+#Create a list of dictionaries where each dictionary represents a 
+#book that you have read. Each dictionary in the list should 
+#have the keys title, author, and genre. Loop through the 
+#list and print out information about each book.
+
+books = [
+    {'title': 'Left of Boom', 'author': 'Some CIA Dude', 'genre': 'non fiction'},
+    {'title': 'American Spartan', 'author': 'Some SF guy', 'genre': 'non fiction'},
+    {'title': 'No Easy Day', 'author': 'Some SEAL', 'genre': 'non fiction'},
+]
+selected_genre = input('Enter a genre: ')
+selected_books = [book for book in books if book ['genre'] == selected_genre]
+
+for book in selected_books:
+    print('----')
+    print('title: ' + book['title'])
+    print('author: ' + book['author'])
+    print('genre: ' + book['genre'])
+    
 
 
 # In[ ]:
