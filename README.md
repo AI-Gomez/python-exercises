@@ -1,1 +1,2 @@
-this is a start of python-exercises repository
+# Hi!
+This repository houses my python exercises from Codeup!
